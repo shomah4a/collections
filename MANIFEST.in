@@ -1,0 +1,7 @@
+include buildout.cfg setup.py MANIFEST.in
+recursive-include test *.py
+recursive-include sphinx *.rst
+recursive-include sphinx *.py
+recursive-include sphinx Makefile
+recursive-include sphinx make.bat
+
