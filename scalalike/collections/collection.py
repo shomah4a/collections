@@ -115,12 +115,12 @@ class Iterable(object):
 
     def zip(self, *iters):
 
-        return itertools.izip(self, *iters)
+        return Iterable(itertools.izip(self, *iters))
 
 
     def zip_with_index(self):
 
-        return ((v, i) for i, v in enumerate(self))
+        return Iterable((v, i) for i, v in enumerate(self))
 
 
 
