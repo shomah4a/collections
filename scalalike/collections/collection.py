@@ -6,7 +6,6 @@ Wrapper for Iterable-object that provide scala-collection like interface.
 import itertools
 
 
-
 class Iterable(object):
     u'''
     Scala Iterator like class
@@ -19,17 +18,17 @@ class Iterable(object):
 
     def map(self, f):
 
-        return Iterable(itertools.imap(f, self.iterable))
+        return self.__class__(itertools.imap(f, self.iterable))
 
 
     def filter(self, pred):
 
-        return Iterable(itertools.ifilter(pred, self.iterable))
+        return self.__class__(itertools.ifilter(pred, self.iterable))
 
 
     def filter_not(self, pred):
 
-        return Iterable(itertools.ifilterfalse(pred, self.iterable))
+        return self.__class__(itertools.ifilterfalse(pred, self.iterable))
 
 
     def flatmap(self, f):
@@ -42,29 +41,29 @@ class Iterable(object):
 
                     yield yld
 
-        return Iterable(it())
+        return self.__class__(it())
 
 
     def take(self, n):
 
-        return Iterable(x[1] for x in itertools.takewhile(lambda x: x[0] < n,
-                                                          enumerate(self.iterable)))
+        return self.__class__(x[1] for x in itertools.takewhile(lambda x: x[0] < n,
+                                                                enumerate(self.iterable)))
 
 
     def drop(self, n):
 
-        return Iterable(x[1] for x in itertools.dropwhile(lambda x: x[0] < n,
-                                                          enumerate(self.iterable)))
+        return self.__class__(x[1] for x in itertools.dropwhile(lambda x: x[0] < n,
+                                                                enumerate(self.iterable)))
 
 
     def takewhile(self, pred):
 
-        return Iterable(itertools.takewhile(pred, self.iterable))
+        return self.__class__(itertools.takewhile(pred, self.iterable))
 
 
     def dropwhile(self, pred):
 
-        return Iterable(itertools.dropwhile(pred, self.iterable))
+        return self.__class__(itertools.dropwhile(pred, self.iterable))
 
 
     def count(self, pred):
@@ -89,7 +88,7 @@ class Iterable(object):
 
                     yield i
 
-        return Iterable(it())        
+        return self.__class__(it())        
 
 
     def __iter__(self):
@@ -115,12 +114,12 @@ class Iterable(object):
 
     def zip(self, *iters):
 
-        return Iterable(itertools.izip(self, *iters))
+        return self.__class__(itertools.izip(self, *iters))
 
 
     def zip_with_index(self):
 
-        return Iterable((v, i) for i, v in enumerate(self))
+        return self.__class__((v, i) for i, v in enumerate(self))
 
 
 
